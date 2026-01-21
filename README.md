@@ -27,9 +27,11 @@ To setup the backend of the application
 
 ```
 cd Server
+npm install
+npx prisma init
 ```
 
-create a `.env` file with the following details
+open the `.env` file and add the following details
 
 ```
 DATABASE_URL="postgresql://<user>:<password>@<server address>:<port number>/<Database Name>"
@@ -38,7 +40,7 @@ HOST=localhost
 JWT_SECRET=<your JWT secret>
 ```
 
-example .env configuration
+example `.env` configuration
 
 ```
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/ExpressReact"
@@ -47,11 +49,9 @@ HOST=localhost
 JWT_SECRET='QWERUJIOFSDJKLA;FSDA'
 ```
 
-after env configuration run the following commands
+after `.env` configuration run the following commands
 
 ```
-npm install
-npx prisma init
 npx prisma migrate dev --name initialMigration
 npx prisma generate
 npm run start:dev

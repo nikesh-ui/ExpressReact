@@ -6,11 +6,9 @@ import axios from "axios";
 
 function App() {
   const [page, setPage] = useState("Login");
-  const [array, setArray] = useState([]);
 
   const fetchAPI = async () => {
     const response = await axios.get("http://localhost:8000/");
-    setArray(response.data.message);
     console.log(response.data.message);
   };
 
