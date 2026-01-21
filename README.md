@@ -1,5 +1,12 @@
 # ExpressReact
 
+### Prerequisites
+
+- Install [Node JS](https://nodejs.org/en/download) based on your Operating System
+- Install [Typescript](https://www.typescriptlang.org/download/) using `npm install -g typescript`
+- Install [Postgres](https://www.postgresql.org/download/) and setup postgres user and password
+- Optional: Install [pgAdmin](https://www.pgadmin.org/download/), _installed by default in windows installation of Postgres_
+
 ## Frontend
 
 To setup frotnend of the application:
@@ -17,10 +24,6 @@ http://localhost:5173/
 ## Backend
 
 To setup the backend of the application
-
-Download and install [Postgres](https://www.postgresql.org/download/) and setup postgres user and password
-
-After installing Postgres:
 
 ```
 cd Server
