@@ -61,6 +61,22 @@ app.post("/users/login", async (req: Request, res: Response) => {
 });
 
 app.get(
+  "/landing",
+  authentication,
+  async (req: ExpressRequest, res: Response, next: NextFunction) => {
+    try {
+      if (!req.user) {
+        return res.status(401);
+      }
+      const { password: _password, id: _id, ...userInfo } = req.user;
+      res.json({ ...userInfo, success: true });
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+app.get(
   "/user",
   authentication,
   async (req: ExpressRequest, res: Response, next: NextFunction) => {
@@ -71,7 +87,7 @@ app.get(
       const { password: _password, ...userWithoutPassowrd } = req.user;
       res.json({ ...userWithoutPassowrd, token: generateJwt(req.user) });
     } catch (error) {
-      // res.json({ message: "error while authoriing", error });
+      // res.json({ message: "error while authorizing", error });
       next(error);
     }
   },
