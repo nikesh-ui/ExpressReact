@@ -5,12 +5,12 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState("");
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     setSuccess("");
-    setError("");
+    setErrors("");
 
     const userData = {
       email: email,
@@ -24,15 +24,14 @@ function Login() {
       );
 
       if (response.data.success) {
-        setSuccess("Login Successfull");
+        setSuccess("Login successfull");
       } else {
-        setError("Login failed");
+        setErrors("Login failed");
+        console.log(response);
       }
     } catch (error) {
-      setError("Error occured during login");
-      console.error(error);
+      setErrors("Error occured during Login");
     }
-    console.log(Response);
   };
 
   return (
@@ -44,19 +43,19 @@ function Login() {
           <input
             type="email"
             name="email"
-            placeholder="enter the email address"
             value={email}
             onChange={(event: any) => setEmail(event.target.value)}
             required
+            placeholder="enter your email address"
           />
           <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
-            placeholder="enter the password"
             value={password}
             onChange={(event: any) => setPassword(event.target.value)}
             required
+            placeholder="enter the password"
           />
           <div className="input-group">
             <button className="primary bordered medium">Submit</button>
@@ -64,7 +63,7 @@ function Login() {
           </div>
         </form>
         {success && <p style={{ color: "green" }}>{success}</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {errors && <p style={{ color: "red" }}>{errors}</p>}
       </div>
     </>
   );

@@ -2,19 +2,19 @@ import axios from "axios";
 import { useState, type SyntheticEvent } from "react";
 
 function Register() {
-  const [username, setusername] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState("");
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     setSuccess("");
-    setError("");
+    setErrors("");
 
     const userData = {
-      username: username,
+      username: userName,
       email: email,
       password: password,
     };
@@ -24,15 +24,15 @@ function Register() {
         "http://localhost:8000/users/register",
         userData,
       );
-      console.log(response.data);
+
       if (response.data.success) {
-        setSuccess("Registration Successfull");
+        setSuccess("Registration successfull");
       } else {
-        setError("Registration failed");
+        setErrors("Registration failed");
+        console.log(response);
       }
     } catch (error) {
-      setError("Error occured during registration");
-      console.error(error);
+      setErrors("Error occured during Registration");
     }
   };
 
@@ -41,31 +41,31 @@ function Register() {
       <h1>Register</h1>
       <div className="container">
         <form className="input-group vertical" onSubmit={handleSubmit}>
-          <label htmlFor="email">User Name</label>
+          <label htmlFor="username">User Name</label>
           <input
-            type="username"
+            type="text"
             name="username"
-            placeholder="enter the user name"
-            value={username}
-            onChange={(event: any) => setusername(event.target.value)}
+            value={userName}
+            onChange={(event: any) => setUserName(event.target.value)}
+            placeholder="enter your User name"
           />
           <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
-            placeholder="enter the email address"
             value={email}
             onChange={(event: any) => setEmail(event.target.value)}
             required
+            placeholder="enter your email address"
           />
           <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
-            placeholder="enter the password"
             value={password}
             onChange={(event: any) => setPassword(event.target.value)}
             required
+            placeholder="enter the password"
           />
           <div className="input-group">
             <button className="primary bordered medium">Submit</button>
@@ -73,7 +73,7 @@ function Register() {
           </div>
         </form>
         {success && <p style={{ color: "green" }}>{success}</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {errors && <p style={{ color: "red" }}>{errors}</p>}
       </div>
     </>
   );

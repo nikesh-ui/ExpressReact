@@ -1,18 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import axios from "axios";
 
 function App() {
-  const [page, setpage] = useState("Login");
+  const [page, setPage] = useState("Login");
+  const [array, setArray] = useState([]);
+
+  const fetchAPI = async () => {
+    const response = await axios.get("http://localhost:8000/");
+    setArray(response.data.message);
+    console.log(response.data.message);
+  };
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
 
   return (
     <>
       <ul>
-        <li onClick={() => setpage("Login")}>
+        <li onClick={() => setPage("Login")}>
           <a>Login</a>
         </li>
-        <li onClick={() => setpage("Register")}>
+        <li onClick={() => setPage("Register")}>
           <a>Register</a>
         </li>
       </ul>
