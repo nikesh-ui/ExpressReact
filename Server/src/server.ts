@@ -25,7 +25,11 @@ app.post("/users/register", async (req: Request, res: Response) => {
       data: { ...req.body, password: hashedPassword },
     });
     const { password: _password, ...userWithoutPassowrd } = user;
-    res.json({ ...userWithoutPassowrd, token: generateJwt(user) });
+    res.json({
+      ...userWithoutPassowrd,
+      token: generateJwt(user),
+      success: true,
+    });
   } catch (error) {
     res.json({ message: "error during registration", error });
   }
@@ -46,7 +50,11 @@ app.post("/users/login", async (req: Request, res: Response) => {
       throw new Error("Incorrect passowrd!");
     }
     const { password: _password, ...userWithoutPassowrd } = user;
-    res.json({ ...userWithoutPassowrd, token: generateJwt(user) });
+    res.json({
+      ...userWithoutPassowrd,
+      token: generateJwt(user),
+      success: true,
+    });
   } catch (error) {
     res.json({ message: "error while logging in", error });
   }
@@ -66,7 +74,7 @@ app.get(
       // res.json({ message: "error while authoriing", error });
       next(error);
     }
-  }
+  },
 );
 
 const PORT = process.env.PORT || 8000;

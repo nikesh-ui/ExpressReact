@@ -27,6 +27,7 @@ function Register() {
 
       if (response.data.success) {
         setSuccess("Registration successfull");
+        console.log(response);
       } else {
         setErrors("Registration failed");
         console.log(response);

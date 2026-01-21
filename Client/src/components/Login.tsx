@@ -25,6 +25,7 @@ function Login() {
 
       if (response.data.success) {
         setSuccess("Login successfull");
+        console.log(response);
       } else {
         setErrors("Login failed");
         console.log(response);
