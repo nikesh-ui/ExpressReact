@@ -6,6 +6,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
   const [errors, setErrors] = useState("");
+  const [token, setToken] = useState("");
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -25,6 +26,7 @@ function Login() {
 
       if (response.data.success) {
         setSuccess("Login successfull");
+        setToken(response.data.token);
         console.log(response);
       } else {
         setErrors("Login failed");
@@ -33,6 +35,15 @@ function Login() {
     } catch (error) {
       setErrors("Error occured during Login");
     }
+  };
+
+  const fetchAPI = async (token: string) => {
+    const response = await axios.get("http://localhost:8000/landing", {
+      headers: {
+        Authorization: "Token " + token,
+      },
+    });
+    console.log(response.data.message);
   };
 
   return (
@@ -63,8 +74,15 @@ function Login() {
             <span></span>
           </div>
         </form>
-        {success && <p style={{ color: "green" }}>{success}</p>}
-        {errors && <p style={{ color: "red" }}>{errors}</p>}
+        {success ? (
+          <>
+            <p style={{ color: "green" }}>{success}</p>{" "}
+            <a href="#" onClick={() => fetchAPI(token)}>
+              redirect
+            </a>
+          </>
+        ) : null}
+        {errors ? <p style={{ color: "red" }}>{errors}</p> : null}
       </div>
     </>
   );

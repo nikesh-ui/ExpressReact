@@ -73,8 +73,8 @@ function Register() {
             <span></span>
           </div>
         </form>
-        {success && <p style={{ color: "green" }}>{success}</p>}
-        {errors && <p style={{ color: "red" }}>{errors}</p>}
+        {success ? <p style={{ color: "green" }}>{success}</p> : null}
+        {errors ? <p style={{ color: "red" }}>{errors}</p> : null}
       </div>
     </>
   );
