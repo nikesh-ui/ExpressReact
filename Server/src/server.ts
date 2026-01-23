@@ -6,16 +6,18 @@ import { compare, hash } from "bcryptjs";
 import { User } from "./generated/prisma/client";
 import { sign } from "jsonwebtoken";
 import { authentication, ExpressRequest } from "./middlewares/auth";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const generateJwt = (user: User): string => {
-  return sign({ email: user.email }, "JWT_SECRET");
+  return sign({ email: user.email }, "JWT_SECRET", { expiresIn: "1d" });
 };
 const corsOptions = {
   origin: ["http://localhost:5173/"],
 };
-app.use(cors(corsOptions));
 
+app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(express.json());
 
 app.post("/users/register", async (req: Request, res: Response) => {
