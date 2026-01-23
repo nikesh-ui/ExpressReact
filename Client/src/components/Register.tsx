@@ -39,16 +39,16 @@ function Register() {
 
   return (
     <>
-      <h1>Register</h1>
+      <h1 className="titletext">Register</h1>
       <div className="container">
         <form className="input-group vertical" onSubmit={handleSubmit}>
-          <label htmlFor="username">User Name</label>
+          <label htmlFor="username">Name</label>
           <input
             type="text"
             name="username"
             value={userName}
             onChange={(event: any) => setUserName(event.target.value)}
-            placeholder="enter your User name"
+            placeholder="enter your name"
           />
           <label htmlFor="email">Email</label>
           <input
@@ -73,8 +73,16 @@ function Register() {
             <span></span>
           </div>
         </form>
-        {success ? <p style={{ color: "green" }}>{success}</p> : null}
-        {errors ? <p style={{ color: "red" }}>{errors}</p> : null}
+        {success ? (
+          <p className="messagetext" style={{ color: "green" }}>
+            {success}
+          </p>
+        ) : null}
+        {errors ? (
+          <p className="messagetext" style={{ color: "red" }}>
+            {errors}
+          </p>
+        ) : null}
       </div>
     </>
   );

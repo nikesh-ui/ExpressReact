@@ -1,7 +1,9 @@
 @import '../node_modules/mini.css/dist/mini-default.min.css';
 
 form {
+  margin-left: 40%;
   min-width: 300px;
+  max-width: 400px;
 }
 
 ul {
@@ -26,4 +28,12 @@ li a {
 
 li a:hover {
   background-color: #111;
+}
+
+.titletext {
+  text-align: center;
+}
+
+.messagetext {
+  text-align: center;
 }
